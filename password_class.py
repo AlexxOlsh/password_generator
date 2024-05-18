@@ -10,7 +10,6 @@ def hide_password(password):
     return secret_word
 
 
-
 class Password:
     # params Uppercase, numbers, specials
     def __init__(self, pass_len, passwords_count, params=None):

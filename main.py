@@ -73,7 +73,7 @@ password_result = password.generate_password()
 if len(password_result) == 1:
     try:
         user_choose = int(input('Вывести пароль на экран или сохранить в файл? 1 - на экран, 0 - в файл: '))
-        if user_choose != 0 or user_choose != 1:
+        if user_choose != 0 and user_choose != 1:
             print('Ошибка: Для ввода допустимы 1 или 0')
             exit()
     except ValueError:
@@ -82,6 +82,7 @@ if len(password_result) == 1:
 
     if user_choose == 1:
         print(f'Ваш пароль: {password_result[0]}     {password.check_password(password_result[0])}')
+        print(password.check_password('I?QL[UEiq'))
     else:
         secret_word = hide_password(password_result[0])
         all_passwords = ''
@@ -92,3 +93,4 @@ else:
     print(f'Ваши пароли:')
     for p in password_result:
         print(f'{p}     {password.check_password(p)}')
+
