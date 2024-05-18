@@ -10,6 +10,22 @@ def hide_password(password):
     return secret_word
 
 
+def chech_symbols(params, password):
+    symbols_count = 0
+    upper_count = 0
+    numbers_count = 0
+
+    for ch in password:
+        if params[0] and ch.isupper():
+            upper_count += 1
+        elif params[1] == 1 and ch.isdigit():
+            numbers_count += 1
+        elif params[2] == 1 and string.punctuation.find(ch) != -1:
+            symbols_count += 1
+
+    return [upper_count, numbers_count, symbols_count]
+
+
 class Password:
     # params Uppercase, numbers, specials
     def __init__(self, pass_len, passwords_count, params=None):
@@ -78,19 +94,11 @@ class Password:
 
     def check_password(self, password):
         res = 0
-        symbols_count = 0
-        upper_count = 0
-        numbers_count = 0
+
         if self.pass_len > 8:
             res = 1
 
-        for ch in password:
-            if self.params[0] and ch.isupper():
-                upper_count += 1
-            elif self.params[1] == 1 and ch.isdigit():
-                numbers_count += 1
-            elif self.params[2] == 1 and string.punctuation.find(ch) != -1:
-                symbols_count += 1
+        upper_count, numbers_count, symbols_count = chech_symbols(self.params, password)
 
         if upper_count > 0:
             res += 1
